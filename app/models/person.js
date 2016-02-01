@@ -1,10 +1,10 @@
 var mongoose = require("mongoose");
 
 var personSchema = mongoose.Schema({
-    name: {
+    name: {type: {
         first: String,
         last: String
-    },
+    }, index:true},
     birthdate: Date,
     results: [{
         time: Number,
@@ -15,4 +15,4 @@ var personSchema = mongoose.Schema({
     
 });
 
-module.exports = personSchema;
+module.exports = mongoose.model('person',personSchema);

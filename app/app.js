@@ -1,4 +1,5 @@
 var express = require("express");
+var mongoose = require("mongoose");
 var app = express();
 
 
@@ -15,6 +16,16 @@ var statRes = require('./routes/staticRouter');
 app.use('/', hello);
 app.use('/people', people);
 app.use('/static', statRes);
+
+
+//connect mongodb/mongoose
+mongoose.connect('mongodb://localhost/rltool', function(err) {
+    if(err) {
+        console.log('db connection error', err);
+    } else {
+        console.log('db connection successful');
+    }
+});
 
 
 module.exports = app;
