@@ -1,0 +1,24 @@
+{
+  "name": "rltool3",
+  "version": "1.0.0",
+  "description": "third try to start",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongoose": "^4.3.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soinwi/rltool3.git"
+  },
+  "author": "",
+  "license": "SEE LICENSE IN README.md",
+  "bugs": {
+    "url": "https://github.com/soinwi/rltool3/issues"
+  },
+  "homepage": "https://github.com/soinwi/rltool3#readme"
+}
