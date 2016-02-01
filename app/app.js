@@ -10,9 +10,11 @@ app.listen(process.env.PORT, function(){
 
 var hello = require('./routes/helloRouter');
 var people = require('./routes/peopleRouter');
+var statRes = require('./routes/staticRouter');
 
 app.use('/', hello);
 app.use('/people', people);
+app.use('/static', statRes);
 
 
 module.exports = app;
