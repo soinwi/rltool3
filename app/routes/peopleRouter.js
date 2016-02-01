@@ -25,9 +25,25 @@ router.get('/:id', function(req,res,next){
     });
 });
 
+router.put('/:id', function(req,res,next){
+   Person.findByIdAndUpdate(req.params.id, req.body, {new:true}, function(err,person){
+       if(err) return next(err);
+       res.json(person._doc);
+   });
+});
+
+
+
 router.post('/', function(req,res, next){
-    
-})
+   Person.create(req.body, function(err,person){
+      if(err)
+      {
+          console.log("Error posting: " + err)
+          return next(err);
+      }
+      res.json(person);
+   }); 
+});
 
 
 module.exports = router;

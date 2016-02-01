@@ -1,8 +1,9 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var app = express();
+var bodyParser = require('body-parser')
 
-
+app.use(bodyParser.json());
 
 
 app.listen(process.env.PORT, function(){
