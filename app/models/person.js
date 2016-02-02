@@ -16,18 +16,24 @@ var personSchema = mongoose.Schema({
     
 });
 
-
+personSchema.methods.sayHello = function(){ return "hello";};
 
 personSchema.methods.getFastestTime = function(cb)
 {
-    this.model('person').findById(this.id, function(err,p){
-        p.results.find().sort('time').exec(function(err,res){
-    //this.results.findOne().sort('time').exec(function(err,res){
-    //this._doc.results.findOne().sort('time').exec(function(err,res){
-        cb(err,res);
-    });
-    });
-}
+    if(this.results != null)
+    {
+         return this.results.sort(function(a,b){
+                return a.time-b.time;
+            })[0];
+    }
+    else
+    {
+        return null;
+    }
+    
+};
+
+
 
 var m = mongoose.model('person',personSchema);
 module.exports = m;

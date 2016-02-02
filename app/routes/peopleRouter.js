@@ -4,9 +4,24 @@ var router = express.Router();
 var Person = require("../models/person");
 
 router.get('/', function(req, res, next) {
-  Person.find(function (err, people) {
+  Person.find( function (err, people) {
     if (err) return next(err);
-    res.json(people);
+    if(req.query.sortedbytime == "true" || req.query.sortedbytime == true)
+    {
+        res.json(people.sort(function(a,b){
+            if(a.getFastestTime() === undefined && b.getFastestTime() === undefined)
+            {return 0;}
+            else if(a.getFastestTime() === undefined) {return 1;}
+            else if(b.getFastestTime() === undefined){ return -1;}
+            
+            return a.getFastestTime().time-b.getFastestTime().time;
+            
+        }));
+    }
+    else
+    {
+        res.json(people);
+    }
   });
 });
 
@@ -96,6 +111,7 @@ router.get('/:id/results/fastest', function(req,res,next){
       }
       else
       {
+          var h = p.sayHello();
           p.getFastestTime(function(err,r)
           {
               res.json(r);
