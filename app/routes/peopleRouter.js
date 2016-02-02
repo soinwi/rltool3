@@ -45,5 +45,34 @@ router.post('/', function(req,res, next){
    }); 
 });
 
+router.post('/:id/results', function(req,res,next){
+   Person.findById(req.params.id, function(err,p){
+       if(err){console.log(err);}
+       p.results.push(req.body);
+       p.save(function(err){
+           if(err){
+                console.log("failed to add result"); 
+           }
+       });
+       res.json(p.results);
+   });
+});
+
+router.get('/:id/results', function(req,res,next){
+   Person.findById(req.params.id, function(err,p){
+        if(err){
+            console.log(err);
+            res.status(500).send("error");
+        }
+        else if(p == null)
+        {
+            res.status(404).send("person '" + req.params.id +"' not found.");
+        }
+        else
+        {
+            res.json(p.results)
+        }
+   });
+});
 
 module.exports = router;

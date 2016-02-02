@@ -9,7 +9,8 @@ var personSchema = mongoose.Schema({
     results: [{
         time: Number,
         track: String,
-        remarks: String
+        remarks: String,
+        timestamp: {type: Date, default: Date.now}
     }]
     
     
