@@ -76,4 +76,33 @@ router.get('/:id/results', function(req,res,next){
    });
 });
 
+router.delete('/:id/results/:resultid', function(req,res,next){
+   Person.findById(req.params.id, function(err, person) {
+      person.results.id(req.params.resultid).remove();
+      person.save();
+      res.send('deleted ' + req.params.resultid);
+   }); 
+});
+
+router.get('/:id/results/fastest', function(req,res,next){
+   Person.findById(req.params.id, function(err,p){
+      if(err)
+      {
+          return next(err);
+      }
+      else if(p == null)
+      {
+          res.status(404).send("not found");
+      }
+      else
+      {
+          p.getFastestTime(function(err,r)
+          {
+              res.json(r);
+          });
+          
+      }
+   }); 
+});
+
 module.exports = router;

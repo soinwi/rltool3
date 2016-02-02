@@ -16,4 +16,18 @@ var personSchema = mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('person',personSchema);
+
+
+personSchema.methods.getFastestTime = function(cb)
+{
+    this.model('person').findById(this.id, function(err,p){
+        p.results.find().sort('time').exec(function(err,res){
+    //this.results.findOne().sort('time').exec(function(err,res){
+    //this._doc.results.findOne().sort('time').exec(function(err,res){
+        cb(err,res);
+    });
+    });
+}
+
+var m = mongoose.model('person',personSchema);
+module.exports = m;
