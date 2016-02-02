@@ -5,10 +5,18 @@ var bodyParser = require('body-parser')
 
 app.use(bodyParser.json());
 
-
-app.listen(process.env.PORT, function(){
-    console.log('Example app listening on port ' + process.env.PORT + '!');
-});
+if(process.env.PORT == undefined || process.env.PORT == null)
+{
+    app.listen(7070, function(){
+        console.log('Example app listening on port ' + 7070 + '!');
+    });
+}
+else
+{
+    app.listen(process.env.PORT, function(){
+        console.log('Example app listening on port ' + process.env.PORT + '!');
+    });
+}
 
 var hello = require('./routes/helloRouter');
 var people = require('./routes/peopleRouter');
