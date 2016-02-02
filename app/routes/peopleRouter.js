@@ -52,6 +52,7 @@ router.post('/:id/results', function(req,res,next){
        p.save(function(err){
            if(err){
                 console.log("failed to add result"); 
+                return next(err);
            }
        });
        res.json(p.results);
@@ -62,7 +63,7 @@ router.get('/:id/results', function(req,res,next){
    Person.findById(req.params.id, function(err,p){
         if(err){
             console.log(err);
-            res.status(500).send("error");
+            return next(err);
         }
         else if(p == null)
         {
