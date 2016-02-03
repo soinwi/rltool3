@@ -1,7 +1,10 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var cors = require('cors');
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
