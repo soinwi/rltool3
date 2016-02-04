@@ -1,0 +1,77 @@
+<h1>People</h1>
+<hr>
+<div class="row marketing" id="people">
+    <table class="table table-striped">
+        <thead> 
+            <tr>
+                <th>#</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Results</th>
+                <th>Actions</th>
+            </tr> 
+        </thead>
+        <tbody ng-repeat="item in vm.people">
+            <tr id="result{{$index + 1}}">
+                <th scope="row">{{$index + 1}}</th>
+                <th>{{item._id}}</th>
+                <td>{{item.name.first}} {{item.name.last}}</td>
+                <td>{{item.results.length}}</td>
+                <td>
+                    <button class="btn btn-default btn-sm"  class="accordion-toggle" data-toggle="collapse" data-parent="#people" data-target=".result{{$index + 1}}">View Results</button>
+                    <button class="btn btn-info btn-sm"  ng-click="vm.addResult(item)">Add Result</button>
+                </td>
+            </tr> 
+            <tr class="result-content">
+                <td></td>
+                <td colspan="3" class="hiddenRow">
+                    <div class="accordion-body collapse result{{$index + 1}}" id="accordion{{$index + 1}}">
+                        <p ng-hide="item.results.length">No result found</p>
+                        <table class="table table-bordered" ng-if="item.results.length">
+                            <thead> 
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Track</th>
+                                    <th>Timestamp</th>
+                                    <th>Action</th>
+                                </tr> 
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="result in item.results" class="animate-repeat">
+                                    <td>{{result.time}}</td>
+                                    <td>{{result.track}}</td>
+                                    <td>{{result.timestamp}}</td>
+                                    <td><button class="btn btn-danger btn-xs" ng-click="vm.deleteResult(item,result)">Delete</button></td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script type="text/ng-template" id="addResultModalContent.html">
+    <div class="modal-header">
+    <h3 class="modal-title">{{people.name.first}} {{people.name.last}}</h3>
+    </div>
+    <div class="modal-body">
+    <form>
+    <div class="form-group">
+    <label>Time</label>
+    <input type="text" class="form-control"placeholder="Time" ng-model="newResult.time">
+    </div>
+    <div class="form-group">
+    <label>Track</label>
+    <input type="text" class="form-control"placeholder="Track" ng-model="newResult.track">
+    </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+    <button type="submit" class="btn btn-info" ng-click="addResult(newResult)">Add Result</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+    </div>
+
+</script>
