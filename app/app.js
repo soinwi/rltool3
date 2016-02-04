@@ -4,7 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-app.use(cors());
+app.use(cors());    //Allow cross site access. For now: from all servers (cors: cross origin resource sharing)
 
 app.use(bodyParser.json());
 
